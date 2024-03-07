@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        div {
+            margin: 350px;
+            margin-top: 170px;
+            background-color: brown;
+            display: flex;
+            height: 200px;
+            width: 600px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            background-color: rgb(50, 44, 122);
+        }y7
+    </style>
+</head>
+<body>
+    <H1 style="color: rgb(213, 230, 230);">TESLA SCHOOL
+    </H1>
+    <div>
+        <h2>Teacher Login</h2>
+        <form id="loginForm" action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <!-- <p>Don't have an account? <a href="/register">Register</a></p> -->
+    </div>
+    <script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+            // Prevent the default form submission
+            event.preventDefault(); 
+            
+            // Check if username or password fields are empty
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            
+            if (username === '' || password === '') {
+                // If any of the fields is empty, show an alert
+                alert("Please enter both username and password.");
+            } else {
+                // If both fields are filled, proceed with form submission
+                // You can redirect to another page as per your requirement
+                window.location.href = "/button";
+            }
+        });
+    </script>
+</body>
+</html>
