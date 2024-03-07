@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Student Attendance</h2>
+
+    <!-- Date Picker -->
+    <input type="date" id="datePicker" name="date" style="margin-bottom: 20px;">
+
+    <table id="student-table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Student data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to fetch student attendance data based on selected date
+        function fetchAttendance(date) {
+            fetch('/get_students?date=' + encodeURIComponent(date))
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const students = data.students;
+                    const tableBody = document.querySelector('#student-table tbody');
+                    tableBody.innerHTML = ''; // Clear previous data
+                    students.forEach(student => {
+                        const row = tableBody.insertRow();
+                        row.insertCell(0).textContent = student[0]; // Student ID
+                        row.insertCell(1).textContent = student[1]; // Name
+                        row.insertCell(2).textContent = student[2]; // Attendance
+                    });
+                } else {
+                    console.error('Failed to fetch student attendance:', data.message);
+                }
+            })
+            .catch(error => console.error('Error fetching student attendance:', error));
+        }
+
+        // Add event listener for date picker change
+        document.getElementById("datePicker").addEventListener("change", function() {
+            const selectedDate = this.value;
+            fetchAttendance(selectedDate);
+        });
+
+        // Initial fetch when the page loads
+        const today = new Date().toISOString().split('T')[0]; // Get today's date
+        fetchAttendance(today);
+    </script>
+
+</body>
+</html>
