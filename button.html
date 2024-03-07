@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla School</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(127, 179, 240);
+            display: flex;
+            flex-direction: column; /* Align elements in a column */
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+            gap: 15px; /* Gap between buttons */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            color: rgb(213, 230, 230);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: rgb(213, 230, 230);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TESLA SCHOOL</h1>
+    <div class="container">
+        <h2>SELECT :</h2>
+        <div class="button-container">
+            <!-- <a href="./register.html"><button id="registerButton">Student Register</button></a>
+            <a href="./attendance.html"><button id="attendanceButton">Student Attendance</button></a> -->
+            <button id="registerButton">Student Register</button>
+            <button id="attendanceButton">Student Attendance</button>
+            <button id="ViewAttendanceLog">View Attendance log</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("registerButton").addEventListener("click", function() {
+            // Redirect to the register.html page
+            window.location.href = "/register";
+            
+        });
+
+        document.getElementById("attendanceButton").addEventListener("click", function() {
+            // Redirect to the attendance.html page
+            window.location.href = "/attendance";
+        });
+        document.getElementById("ViewAttendanceLog").addEventListener("click", function() {
+            // Redirect to the attendance.html page
+            window.location.href = "/view_attendance";
+        });    
+    </script>
+</body>
+</html>
