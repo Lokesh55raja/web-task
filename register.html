@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #4951b9;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: rgb(213, 230, 230);
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 20px; 
+        }
+
+        form {
+            background-color: #a81f1f;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px; 
+            margin-top: 50px; 
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px; 
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        
+
+    </script>
+</head>
+<body>
+    <h1>TESLA SCHOOL</h1>
+    <div>
+        <h2>Student Registration</h2>
+        
+        <form action="/add_student" method="post">
+            <label for="regNo">Registration Number:</label>
+            <input type="text" id="regNo" name="regNo" required><br>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required><br>
+            <label for="class">Class:</label>
+            <input type="text" id="classs" name="classs" required><br>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        function showPopup() {
+            alert("Registration Completed");
+        }
+    </script>
+</body>
+</html>
