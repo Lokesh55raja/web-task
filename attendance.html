@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Registration</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Student Attendance Registration</h2>
+
+   
+    <input type="date" id="datePicker" name="date" style="margin-top: 20px;">
+
+    <form id="attendance-form" method="post" action="/add_attendance">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Student 1 -->
+                <tr>
+                    <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
+                    <td><input type="text" name="name" placeholder="Enter Name"></td>
+                    <td>
+                        <select name="attendance">
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+
+                
+                <!-- Student 2 -->
+                <tr>
+                    <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
+                    <td><input type="text" name="name" placeholder="Enter Name"></td>
+                    <td>
+                        <select name="attendance">
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                  <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
+                  <td><input type="text" name="name" placeholder="Enter Name"></td>
+                  <td>
+                      <select name="attendance">
+                          <option value="present">Present</option>
+                          <option value="absent">Absent</option>
+                      </select>
+                  </td>
+              </tr>
+              <tr>
+                <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
+                <td><input type="text" name="name" placeholder="Enter Name"></td>
+                <td>
+                    <select name="attendance">
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                    </select>
+                </td>
+            </tr>
+               
+            </tbody>
+        </table>
+
+        <!-- Submit button -->
+        <div class="button-container">
+            <button type="submit" class="submit-button">Submit Attendance</button>
+        </div>
+    </form>
+    <script>
+        // Add event listener to the form submission
+        document.getElementById("attendance-form").addEventListener("submit", function(event) {
+            // Get the selected date from the date picker
+            var selectedDate = document.getElementById("datePicker").value;
+            // Add the selected date to the form data
+            this.action = "/add_attendance?date=" + encodeURIComponent(selectedDate);
+        });
+    </script>
+
+</body>
+</html>
