@@ -1,17 +1,12 @@
-from flask import Flask, render_template, request
-from flask import Flask, jsonify
-import pymysql
-from datetime import datetime
-
-
-
+from flask import Flask, render_template, request, jsonify
 import mysql.connector
+from datetime import datetime
 
 app = Flask(__name__)
 
 # MySQL connection configuration
 conn = mysql.connector.connect(
-    host='3.110.40.237',
+    host='13.201.193.4',
     user='Lokie',
     password='Lokie#2000',
     database='studentdb'
@@ -38,7 +33,7 @@ def add_student():
     else:
         return render_template('button.html')
 
-
+#Function to insert attendance.html data into the database
 @app.route('/add_attendance', methods=['POST'])
 def add_attendance():
     try:
@@ -72,8 +67,6 @@ def add_attendance():
         return jsonify({'success': False, 'message': f'Error: {str(e)}'})
 
 
-    
-
 @app.route('/')
 def home():
     return render_template('login.html')
@@ -90,7 +83,7 @@ def attendance():
 def register():
     return render_template('register.html')
 
-
+#Function to insert attendance.html db into the view attendance log
 @app.route('/get_students', methods=['GET']) 
 def get_students():
     try:
@@ -111,7 +104,20 @@ def get_students():
 def view_attendance():
     return render_template('view_attendance.html')
 
+#Function to insert student registration db into the attendance.html page view
+@app.route('/get_students_registration', methods=['GET']) 
+def get_students_registration():
+    try:
+        cursor = conn.cursor()
+        query = "SELECT  registration_number, student_name FROM student_registration"
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        students = [{'student_id': student[0], 'name': student[1]} for student in data]
+        return jsonify({'success': True, 'students': students})
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
+
+
 if __name__ == '__main__':
     app.run(debug=True) 
-
-
