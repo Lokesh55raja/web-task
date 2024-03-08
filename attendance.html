@@ -3,46 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Attendance Registration</title>
+    <title>Student Attendance</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .submit-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+        /* CSS styles as before */
     </style>
 </head>
 <body>
 
-    <h2>Student Attendance Registration</h2>
+    <h2>Student Attendance</h2>
 
-   
+    <!-- Date Picker -->
     <input type="date" id="datePicker" name="date" style="margin-top: 20px;">
 
     <form id="attendance-form" method="post" action="/add_attendance">
-        <table>
+        <table id="student-table">
             <thead>
                 <tr>
                     <th>Student ID</th>
@@ -51,51 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Student 1 -->
-                <tr>
-                    <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
-                    <td><input type="text" name="name" placeholder="Enter Name"></td>
-                    <td>
-                        <select name="attendance">
-                            <option value="present">Present</option>
-                            <option value="absent">Absent</option>
-                        </select>
-                    </td>
-                </tr>
-
-                
-                <!-- Student 2 -->
-                <tr>
-                    <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
-                    <td><input type="text" name="name" placeholder="Enter Name"></td>
-                    <td>
-                        <select name="attendance">
-                            <option value="present">Present</option>
-                            <option value="absent">Absent</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                  <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
-                  <td><input type="text" name="name" placeholder="Enter Name"></td>
-                  <td>
-                      <select name="attendance">
-                          <option value="present">Present</option>
-                          <option value="absent">Absent</option>
-                      </select>
-                  </td>
-              </tr>
-              <tr>
-                <td><input type="text" name="student_id" placeholder="Enter Student ID"></td>
-                <td><input type="text" name="name" placeholder="Enter Name"></td>
-                <td>
-                    <select name="attendance">
-                        <option value="present">Present</option>
-                        <option value="absent">Absent</option>
-                    </select>
-                </td>
-            </tr>
-               
+                <!-- Student data will be inserted here -->
             </tbody>
         </table>
 
@@ -104,7 +34,33 @@
             <button type="submit" class="submit-button">Submit Attendance</button>
         </div>
     </form>
+
     <script>
+        // Fetch student registration data from the server
+        fetch('/get_students_registration')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const students = data.students;
+                const tableBody = document.querySelector('#student-table tbody');
+                students.forEach(student => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = `<input type="text" name="student_id" value="${student.student_id}" readonly>`;
+                    row.insertCell(1).innerHTML = `<input type="text" name="name" value="${student.name}" readonly>`;
+                    const attendanceSelect = document.createElement('select');
+                    attendanceSelect.name = 'attendance';
+                    attendanceSelect.innerHTML = `
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                    `;
+                    row.insertCell(2).appendChild(attendanceSelect); // Attendance
+                });
+            } else {
+                console.error('Failed to fetch student registration:', data.message);
+            }
+        })
+        .catch(error => console.error('Error fetching student registration:', error));
+    
         // Add event listener to the form submission
         document.getElementById("attendance-form").addEventListener("submit", function(event) {
             // Get the selected date from the date picker
@@ -113,6 +69,7 @@
             this.action = "/add_attendance?date=" + encodeURIComponent(selectedDate);
         });
     </script>
+    
 
 </body>
 </html>
