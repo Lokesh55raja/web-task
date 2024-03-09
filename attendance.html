@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Attendance</title>
     <style>
-        /* CSS styles as before */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -41,7 +52,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                const students = data.students;
+                const students = data.students; 
                 const tableBody = document.querySelector('#student-table tbody');
                 students.forEach(student => {
                     const row = tableBody.insertRow();
@@ -51,8 +62,8 @@
                     attendanceSelect.name = 'attendance';
                     attendanceSelect.innerHTML = `
                         <option value="present">Present</option>
-                        <option value="absent">Absent</option>
-                    `;
+                        <option value="absent">Absent</option>`
+                    ;
                     row.insertCell(2).appendChild(attendanceSelect); // Attendance
                 });
             } else {
